@@ -3,48 +3,27 @@
 int main(int argc, char *argv[]) {
   int N, // numero de peixinhos
   X, // soma a ser obtida
-  P1[5000],
-  P2[5000],
-  P3[5000],
-  i,
-  max1, max2, max3;
+  i, // indice p/ os valores dos peixes
+  j, // indice p/ piscinas
+  temp, // armazena temporareamente o valor asociado de cada peixe
+  max, // peixe de maior valor
+  soma; // soma dos valores dos maiores peixes
   
-  while (1) {
-    max1 = max2 = max3 = -300-1;
-    
-    scanf("%d %d", &N, &X);
+  while (scanf("%d %d", &N, &X) && (N || X)) {
 
-    if ((N == 0) && (X == 0))
-      break;
-
-    for (i = 0; i < N; i++) {
-      scanf("%d", &P1[i]);
-    }
-
-    for (i = 0; i < N; i++) {
-      scanf("%d", &P2[i]);
-    }
-    
-    for (i = 0; i < N; i++) {
-      scanf("%d", &P3[i]);
+    soma = 0;
+  
+    for(j = 0; j < 3; j++) { // itera para 3 piscinas
+      max = -300-1; // minimo valor possivel de cada peixe - 1
+      for (i = 0; i < N; i++) { // recebe o valor de cada peixe da piscina j e atualiza o maior valor do peixe
+        scanf("%d", &temp);
+        if(temp > max)
+          max = temp;
+      }
+      soma += max; // acumula na soma o maior valor do peixe na piscina j
     }
     
-    for (i = 0; i < N; i++) {
-      if(P1[i] > max1)
-        max1 = P1[i];
-    }
-    
-    for (i = 0; i < N; i++) {
-      if(P2[i] > max2)
-        max2 = P2[i];
-    }
-    
-    for (i = 0; i < N; i++) {
-      if(P3[i] > max3)
-        max3 = P3[i];
-    }
-    
-    if ((max1+max2+max3) >= X)
+    if (soma >= X) // valor acumulado maior ou igual ao premio
         printf("SIM\n");
     else
         printf("NÃO\n");
